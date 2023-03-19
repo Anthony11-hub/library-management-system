@@ -9,6 +9,19 @@ router.get('/', (req, res) => {
     res.render('login.ejs', {errs: []});
 });
 
+
+// router.post('/', (req,res) => {
+//     if(!errors){
+
+//     }
+//     if(req.body.email === user.email && req.body.password === user.password){
+//         session = req.session;
+//         session.user_id=req.body.email;
+//         console.log(req.session)
+//         res.render('/student/home')
+//     }
+// })
+
 router.post('/', (req, res)=>{
 
     const data = {
