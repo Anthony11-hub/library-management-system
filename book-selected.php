@@ -79,7 +79,7 @@ foreach($results as $result)
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-5 pb-4 pb-lg-0">
-                <img class="img-fluid rounded w-100" src="bookimg/<?php echo htmlentities($result->bookImage);?>" width="100" alt="book image">
+                <img class="img-fluid rounded " src="admin/bookimg/<?php echo htmlentities($result->bookImage);?>" width="300" alt="book image">
             </div>
             <div class="col-lg-7">
                 <h3 class="mb-4">Book Decription</h3>
@@ -100,7 +100,7 @@ foreach($results as $result)
                 <?php }} ?>
                   
                 <?php if($result->Status=='1'): ?>
-                  <a href="<?php echo htmlentities($result->Link);?>" class="btn blue btn-outline-primary mr-4">Read Book</a>
+                  <a href="<?php echo htmlentities($result->Link);?>" class="btn blue btn-outline-primary mr-4" target="_blank">Read Book</a>
                 <?php endif;?>  
                 <a href="request-book.php" class="btn blue btn-outline-primary mr-4">Request Book</a>
             </div>
@@ -135,14 +135,14 @@ foreach($results as $result)
       foreach($results as $result)
       {               ?> 
       <div class="card">
-        <img src="bookimg/<?php echo htmlentities($result->bookImage);?>" alt="John" style="width:100%">
+        <img src="admin/bookimg/<?php echo htmlentities($result->bookImage);?>" width="100">
         <h1 class="title"><?php echo htmlentities($result->AuthorName);?></h1>
         <p class="title"><?php echo htmlentities($result->CategoryName);?></p>
         <a href="#"><i class="fa fa-dribbble"></i></a>
         <a href="#"><i class="fa fa-twitter"></i></a>
         <a href="#"><i class="fa fa-linkedin"></i></a>
         <a href="#"><i class="fa fa-facebook"></i></a>
-        <a href="book-selected.php?bookid=<?php echo htmlentities($result->bookid);?>">View this book</a>
+        <a href="book-selected.php?bookid=<?php echo htmlentities($result->bookid);?>">View book</a>
         <!-- <p><button>View This Book</button></p> -->
       </div>
       <?php $cnt=$cnt+1;}} ?>                      
