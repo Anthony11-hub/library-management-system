@@ -120,7 +120,12 @@ foreach($results as $result)
       <div id="slides__1" class="slide">
       <?php 
       $bookid=intval($_GET['bookid']);
-      $sql = "SELECT tblcategory.CategoryName,tblauthors.AuthorName,tblbooks.id as bookid,tblbooks.bookImage from  tblbooks join tblcategory on tblcategory.id=tblbooks.CatId join tblauthors on tblauthors.id=tblbooks.AuthorId join tblkeywords on tblkeywords.id=tblcategory.id LIMIT 5 ";
+      $sql = "SELECT c.CategoryName, a.AuthorName, b.id AS bookid, b.bookImage 
+      FROM tblbooks b 
+      JOIN tblcategory c ON c.id = b.CatId 
+      JOIN tblauthors a ON a.id = b.AuthorId 
+      WHERE c.id = (SELECT CatId FROM tblbooks WHERE id = $bookid) AND b.id != $bookid
+      LIMIT 5";
       $query = $dbh -> prepare($sql);
       $query->execute();
       $results=$query->fetchAll(PDO::FETCH_OBJ);
