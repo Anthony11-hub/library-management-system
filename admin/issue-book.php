@@ -95,56 +95,37 @@ error:function (){}
       <!------MENU SECTION START-->
 <?php include('includes/header.php');?>
 <!-- MENU SECTION END-->
-    <div class="content-wrapper">
-         <div class="container">
-        <div class="row pad-botm">
-            <div class="col-md-12">
-                <h4 class="header-line">Issue a New Book</h4>
-                
-                            </div>
-
-</div>
-<div class="row">
-<div class="col-md-10 col-sm-6 col-xs-12 col-md-offset-1">
-<div class="panel panel-info">
-<div class="panel-heading">
-Issue a New Book
-</div>
-<div class="panel-body">
-<form role="form" method="post">
-
-<div class="form-group">
-<label>Srtudent id<span style="color:red;">*</span></label>
-<input class="form-control" type="text" name="studentid" id="studentid" onBlur="getstudent()" autocomplete="off"  required />
-</div>
-
-<div class="form-group">
-<span id="get_student_name" style="font-size:16px;"></span> 
-</div>
-
-
-
-
-
-<div class="form-group">
-<label>ISBN Number or Book Title<span style="color:red;">*</span></label>
-<input class="form-control" type="text" name="booikid" id="bookid" onBlur="getbook()"  required="required" />
-</div>
-
- <div class="form-group" id="get_book_name">
-
- </div>
-<button type="submit" name="issue" id="submit" class="btn btn-info">Issue Book </button>
-
-                                    </form>
-                            </div>
-                        </div>
-                            </div>
-
+<div class="container">
+  <div class="row pad-botm">
+    <h4>Issue a New Book</h4>
+  </div>
+  <div class="row">
+    <div class="col-md-10 col-sm-6 col-xs-12 col-md-offset-1">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          Issue a New Book
         </div>
-   
+        <div class="panel-body">
+          <form role="form" method="post">
+            <div class="form-group">
+              <label for="studentid">Student ID<span style="color:red;">*</span></label>
+              <input class="form-control" type="text" name="studentid" id="studentid" onBlur="getstudent()" autocomplete="off" required />
+            </div>
+            <div class="form-group">
+              <span id="get_student_name" style="font-size:16px;"></span> 
+            </div>
+            <div class="form-group">
+              <label for="bookid">ISBN Number or Book Title<span style="color:red;">*</span></label>
+              <input class="form-control" type="text" name="bookid" id="bookid" onBlur="getbook()" required />
+            </div>
+            <div class="form-group" id="get_book_name"></div>
+            <button type="submit" name="issue" id="submit" class="btn btn-info">Issue Book</button>
+          </form>
+        </div>
+      </div>
     </div>
-    </div>
+  </div>
+</div>
      <!-- CONTENT-WRAPPER SECTION END-->
   <?php include('includes/footer.php');?>
       <!-- FOOTER SECTION END-->

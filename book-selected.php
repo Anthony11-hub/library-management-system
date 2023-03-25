@@ -18,7 +18,7 @@ $isbn=$_POST['isbn'];
 $price=$_POST['price'];
 $bookid=intval($_GET['bookid']);
 $keywords=$_POST['keywords'];
-
+$studentid=intval($_GET['studentid']);
 
 }
 ?>
@@ -57,7 +57,6 @@ $keywords=$_POST['keywords'];
       <li class="nav-item">
         <a class="nav-link" href="logout.php">Logout</a>
       </li>
-    </ul>
   </div>
 </nav>
 
