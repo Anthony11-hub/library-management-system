@@ -3,25 +3,25 @@ session_start();
 error_reporting(0);
 include('includes/config.php');
 if(strlen($_SESSION['login'])==0)
-    {   
-header('location:index.php');
+{   
+    header('location:index.php');
 }
-else{ 
-
-if(isset($_POST['update']))
-{
-$bookImage=$_POST['bookImage'];
-$bookname=$_POST['bookname'];
-$category=$_POST['category'];
-$author=$_POST['author'];
-$isbn=$_POST['isbn'];
-$price=$_POST['price'];
-$bookid=intval($_GET['bookid']);
-$keywords=$_POST['keywords'];
-$studentid=intval($_GET['studentid']);
-
-}
+else
+{ 
+    if(isset($_POST['update']))
+    {
+        $bookImage=$_POST['bookImage'];
+        $bookname=$_POST['bookname'];
+        $category=$_POST['category'];
+        $author=$_POST['author'];
+        $isbn=$_POST['isbn'];
+        $price=$_POST['price'];
+        $bookid=intval($_GET['bookid']);
+        $keywords=$_POST['keywords'];
+        $studentid=intval($_GET['studentid']);
+    }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,17 +61,19 @@ $studentid=intval($_GET['studentid']);
 </nav>
 
 <?php 
-$bookid=intval($_GET['bookid']);
-$sql = "SELECT tblbooks.BookName,tblcategory.CategoryName,tblcategory.id as cid,tblauthors.AuthorName,tblauthors.id as athrid,tblbooks.ISBNNumber,tblbooks.BookPrice,tblbooks.id as bookid,tblbooks.bookImage,tblbooks.isIssued, tblbooks.Status, tblbooks.Link from  tblbooks join tblcategory on tblcategory.id=tblbooks.CatId join tblauthors on tblauthors.id=tblbooks.AuthorId where tblbooks.id=:bookid";
-$query = $dbh -> prepare($sql);
-$query->bindParam(':bookid',$bookid,PDO::PARAM_STR);
-$query->execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
-$cnt=1;
-if($query->rowCount() > 0)
-{
-foreach($results as $result)
-{               ?>  
+    $bookid=intval($_GET['bookid']);
+    $sql = "SELECT tblbooks.BookName,tblcategory.CategoryName,tblcategory.id as cid,tblauthors.AuthorName,tblauthors.id as athrid,tblbooks.ISBNNumber,tblbooks.BookPrice,tblbooks.id as bookid,tblbooks.bookImage,tblbooks.isIssued, tblbooks.Status, tblbooks.Link from  tblbooks join tblcategory on tblcategory.id=tblbooks.CatId join tblauthors on tblauthors.id=tblbooks.AuthorId where tblbooks.id=:bookid";
+    $query = $dbh -> prepare($sql);
+    $query->bindParam(':bookid',$bookid,PDO::PARAM_STR);
+    $query->execute();
+    $results=$query->fetchAll(PDO::FETCH_OBJ);
+    $cnt=1;
+
+    if($query->rowCount() > 0)
+    {
+        foreach($results as $result)
+        {               
+?>  
 
   <!-- About Start -->
   <div class="container-fluid py-5" id="about">
@@ -110,63 +112,56 @@ foreach($results as $result)
 
 
 <div class="reco">
-  <h2>Other book in this field</h2>
+  <h2>Other Books in This Category</h2>
 
-<div class="slider-container">
+  <div class="row">
+    <?php 
+    $bookid = intval($_GET['bookid']);
+    $sql = "SELECT c.CategoryName, a.AuthorName, b.id AS bookid, b.bookImage 
+    FROM tblbooks b 
+    JOIN tblcategory c ON c.id = b.CatId 
+    JOIN tblauthors a ON a.id = b.AuthorId 
+    WHERE c.id = (SELECT CatId FROM tblbooks WHERE id = $bookid) AND b.id != $bookid
+    LIMIT 5";
+    $query = $dbh->prepare($sql);
+    $query->execute();
+    $results = $query->fetchAll(PDO::FETCH_OBJ);
+    $cnt = 1;
 
-  <div class="slider">
-    <div class="slides">
-      <div id="slides__1" class="slide">
-      <?php 
-      $bookid=intval($_GET['bookid']);
-      $sql = "SELECT c.CategoryName, a.AuthorName, b.id AS bookid, b.bookImage 
-      FROM tblbooks b 
-      JOIN tblcategory c ON c.id = b.CatId 
-      JOIN tblauthors a ON a.id = b.AuthorId 
-      WHERE c.id = (SELECT CatId FROM tblbooks WHERE id = $bookid) AND b.id != $bookid
-      LIMIT 5";
-      $query = $dbh -> prepare($sql);
-      $query->execute();
-      $results=$query->fetchAll(PDO::FETCH_OBJ);
-      $cnt=1;
-      if($query->rowCount() > 0)
-      {
-      foreach($results as $result)
-      {               ?> 
-      <div class="card">
-        <img src="admin/bookimg/<?php echo htmlentities($result->bookImage);?>" width="100">
-        <h1 class="title"><?php echo htmlentities($result->AuthorName);?></h1>
-        <p class="title"><?php echo htmlentities($result->CategoryName);?></p>
-        <a href="#"><i class="fa fa-dribbble"></i></a>
-        <a href="#"><i class="fa fa-twitter"></i></a>
-        <a href="#"><i class="fa fa-linkedin"></i></a>
-        <a href="#"><i class="fa fa-facebook"></i></a>
-        <a href="book-selected.php?bookid=<?php echo htmlentities($result->bookid);?>">View book</a>
-        <!-- <p><button>View This Book</button></p> -->
-      </div>
-      <?php $cnt=$cnt+1;}} ?>                      
-        <a class="slide__prev" href="#slides__4" title="Next"></a>
-        <a class="slide__next" href="#slides__2" title="Next"></a>
-      </div>
-      <div id="slides__2" class="slide">
-        <span class="slide__text">2</span>
-        <a class="slide__prev" href="#slides__1" title="Prev"></a>
-        <a class="slide__next" href="#slides__3" title="Next"></a>
-      </div>
-      <div id="slides__3" class="slide">
-        <span class="slide__text">3</span>
-        <a class="slide__prev" href="#slides__2" title="Prev"></a>
-        <a class="slide__next" href="#slides__4" title="Next"></a>
-      </div>
-      <div id="slides__4" class="slide">
-        <span class="slide__text">4</span>
-        <a class="slide__prev" href="#slides__3" title="Prev"></a>
-        <a class="slide__next" href="#slides__1" title="Prev"></a>
-      </div>
-    </div>
+    if($query->rowCount() > 0)
+    {
+        foreach($results as $result)
+        {               
+          ?>
+          <div class="col-md-3">
+            <div class="card mb-3">
+              <img src="admin/bookimg/<?php echo htmlentities($result->bookImage);?>" class="card-img-top" alt="<?php echo htmlentities($result->AuthorName);?>">
+              <div class="card-body">
+                <h5 class="card-title"><?php echo htmlentities($result->AuthorName);?></h5>
+                <p class="card-subtitle"><?php echo htmlentities($result->CategoryName);?></p>
+                <a href="book-selected.php?bookid=<?php echo htmlentities($result->bookid);?>" class="btn btn-primary btn-block">View Book</a>
+              </div>
+            </div>
+          </div>
+          <?php 
+        }
+    }
+    else
+    {
+        ?>
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="card-body">
+              No Recommendations Found
+            </div>
+          </div>
+        </div>
+        <?php 
+    } 
+    ?>                      
   </div>
 </div>
-</div>
+
 <footer>
   <h2>Library Management System</h2>
 </footer>

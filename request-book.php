@@ -8,7 +8,7 @@ header('location:index.php');
 }
 else{ 
 
-if(isset($_POST['add']))
+if(isset($_POST['issue']))
 {
 $studentid=strtoupper($_POST['studentid']);
 $bookid=$_POST['bookid'];
@@ -17,18 +17,17 @@ $sql="INSERT INTO  tblrequestbook(StudentID,BookId) VALUES(:studentid,:bookid)";
 $query = $dbh->prepare($sql);
 $query->bindParam(':studentid',$studentid,PDO::PARAM_STR);
 $query->bindParam(':bookid',$bookid,PDO::PARAM_STR);
-// $query->bindParam(':isissued',$isissued,PDO::PARAM_STR);
 $query->execute();
 $lastInsertId = $dbh->lastInsertId();
 if($lastInsertId)
 {
-$_SESSION['msg']="Book request successfull";
-header('location:book-selected.php');
+$_SESSION['msg']="Book request successful";
+header('location:dashboard.php');
 }
 else 
 {
 $_SESSION['error']="Something went wrong. Please try again";
-header('location:book-selected.php');
+header('location:dashboard.php');
 }
 
 }
