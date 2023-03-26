@@ -1,71 +1,73 @@
-<div class="navbar navbar-inverse set-radius-zero" >
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand">
+<nav class="navbar navbar-inverse navbar-fixed-top" style="background-color: #09150A;">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarContent">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
 
-                    <img src="assets/img/logo.png" />
-                </a>
-
-            </div>
-
-            <div class="right-div">
-                <a href="logout.php" class="btn btn-danger pull-right">LOG ME OUT</a>
-            </div>
-        </div>
+      <!-- <a class="navbar-brand" href="#">
+        <img src="assets/img/logo.png" >
+      </a> -->
     </div>
-    <!-- LOGO HEADER END-->
-    <section class="menu-section">
-        <div class="container">
-            <div class="row ">
-                <div class="col-md-12">
-                    <div class="navbar-collapse collapse ">
-                        <ul id="menu-top" class="nav navbar-nav navbar-right">
-                            <li><a href="dashboard.php" class="menu-top-active">DASHBOARD</a></li>
-                           
-                            <li>
-                                <a href="#" class="dropdown-toggle" id="ddlmenuItem" data-toggle="dropdown"> Categories <i class="fa fa-angle-down"></i></a>
-                                <ul class="dropdown-menu" role="menu" aria-labelledby="ddlmenuItem">
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="add-category.php">Add Category</a></li>
-                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="manage-categories.php">Manage Categories</a></li>
-                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="add-keywords.php">Add Keywords</a></li>
-                                     <!-- <li role="presentation"><a role="menuitem" tabindex="-1" href="specify-type.php">Add Ebook Link</a></li> -->
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#" class="dropdown-toggle" id="ddlmenuItem" data-toggle="dropdown"> Authors <i class="fa fa-angle-down"></i></a>
-                                <ul class="dropdown-menu" role="menu" aria-labelledby="ddlmenuItem">
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="add-author.php">Add Author</a></li>
-                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="manage-authors.php">Manage Authors</a></li>
-                                </ul>
-                            </li>
- <li>
-                                <a href="#" class="dropdown-toggle" id="ddlmenuItem" data-toggle="dropdown"> Books <i class="fa fa-angle-down"></i></a>
-                                <ul class="dropdown-menu" role="menu" aria-labelledby="ddlmenuItem">
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="add-book.php">Add Book</a></li>
-                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="manage-books.php">Manage Books</a></li>
-                                     <!-- <li role="presentation"><a role="menuitem" tabindex="-1" href="edit-link.php">Edit Link</a></li> -->
-                                </ul>
-                            </li>
 
-                           <li>
-                                <a href="#" class="dropdown-toggle" id="ddlmenuItem" data-toggle="dropdown"> Issue Books <i class="fa fa-angle-down"></i></a>
-                                <ul class="dropdown-menu" role="menu" aria-labelledby="ddlmenuItem">
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="issue-book.php">Issue New Book</a></li>
-                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="manage-issued-books.php">Manage Issued Books</a></li>
-                                </ul>
-                            </li>
-                             <li><a href="reg-students.php">Reg Students</a></li>
-                    
-  <li><a href="change-password.php">Change Password</a></li>
-                        </ul>
-                    </div>
-                </div>
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="nav navbar-nav navbar-right" style="color: #fff;">
+        <li><a href="dashboard.php">DASHBOARD</a></li>
 
-            </div>
-        </div>
-    </section>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: #fff;">
+            Categories <span class="caret"></span>
+          </a>
+
+          <ul class="dropdown-menu">
+            <li><a href="add-category.php">Add Category</a></li>
+            <li><a href="manage-categories.php">Manage Categories</a></li>
+            <li><a href="add-keywords.php">Add Keywords</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: #fff;">
+            Authors <span class="caret"></span>
+          </a>
+
+          <ul class="dropdown-menu">
+            <li><a href="add-author.php">Add Author</a></li>
+            <li><a href="manage-authors.php">Manage Authors</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: #fff;">
+            Books <span class="caret"></span>
+          </a>
+
+          <ul class="dropdown-menu">
+            <li><a href="add-book.php">Add Book</a></li>
+            <li><a href="manage-books.php">Manage Books</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: #fff;">
+            Issue Books <span class="caret"></span>
+          </a>
+
+          <ul class="dropdown-menu">
+            <li><a href="requested-books.php">Requested Books</a></li>
+            <li><a href="issue-book.php">Issue New Book</a></li>
+            <li><a href="manage-issued-books.php">Manage Issued Books</a></li>
+          </ul>
+        </li>
+
+        <li><a href="reg-students.php" style="color: #fff;">Reg Students</a></li>
+        <li><a href="change-password.php" style="color: #fff;">Change Password</a></li>
+
+        <li><a href="logout.php" class="btn btn-danger" style="color: #fff;">LOG ME OUT</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
