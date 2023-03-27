@@ -19,23 +19,12 @@ else{
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Online Library Management System | User Dash Board</title>
-    <!-- BOOTSTRAP CORE STYLE  -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!-- <link href="assets/css/bootstrap.css" rel="stylesheet" /> -->
-    
-    <!-- FONT AWESOME STYLE  -->
-    <!-- <link href="assets/css/font-awesome.css" rel="stylesheet" /> -->
-    <!-- CUSTOM STYLE  -->
-    <!-- <link rel="stylesheet" href="assets/css/main.css"> -->
-    <!-- <link href="assets/css/style.css" rel="stylesheet" /> -->
-    
-    <!-- GOOGLE FONT -->
-    <!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' /> -->
-
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="assets/css/main.css">
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">Library Management System</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -63,55 +52,68 @@ else{
       </li>
     </ul>
   </div>
-</nav>
+</nav> -->
+<header id="" class="header-2">
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">My Books</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </nav>
+        <div class="wrap-2">
+            <div class="search">
+                <input type="text" class="search__term" placeholder="what are you looking for?">
+                <button type="submit" class="search__button">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </header>
 
 <!-- navbar -->
 
 
 
 <!-- MENU SECTION END-->
-<div class="content-wrapper">
-  <div class="container">
-    <div class="row pad-botm">
-      <div class="row">
-        <div class="col-md-12">
-                    <!-- Advanced Tables -->
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              Current Books 
-            </div>
-            <div class="panel-body">
-              <?php $sql = "SELECT tblbooks.BookName,tblcategory.CategoryName,tblauthors.AuthorName,tblbooks.ISBNNumber,tblbooks.BookPrice,tblbooks.id as bookid,tblbooks.bookImage,tblbooks.isIssued from  tblbooks join tblcategory on tblcategory.id=tblbooks.CatId join tblauthors on tblauthors.id=tblbooks.AuthorId";
-              $query = $dbh -> prepare($sql);
-              $query->execute();
-              $results=$query->fetchAll(PDO::FETCH_OBJ);
-              $cnt=1;
-              if($query->rowCount() > 0)
-              {
-              foreach($results as $result)
-              {               ?>  
-              <div class="col-md-4" style="float:left; height:300px;">   
-                <img src="admin/bookimg/<?php echo htmlentities($result->bookImage);?>" width="100">
-                <br /><b>
-                  <a href="book-selected.php?bookid=<?php echo htmlentities($result->bookid);?>"><?php echo htmlentities($result->BookName);?></a></b><br />
-                <?php echo htmlentities($result->CategoryName);?><br />
-                <?php echo htmlentities($result->AuthorName);?><br />
-                <?php echo htmlentities($result->ISBNNumber);?><br />
-                <?php if($result->isIssued=='1'): ?>
-                <p style="color:red;">Book Already issued</p>
-                <?php endif;?>
-              </div>
+<?php
+    $sql = "
+        SELECT tblbooks.BookName, tblcategory.CategoryName, tblauthors.AuthorName, 
+            tblbooks.ISBNNumber, tblbooks.BookPrice, tblbooks.id AS bookid, 
+            tblbooks.bookImage, tblbooks.isIssued 
+        FROM tblbooks 
+        JOIN tblcategory ON tblcategory.id = tblbooks.CatId 
+        JOIN tblauthors ON tblauthors.id = tblbooks.AuthorId";
+    $query = $dbh->prepare($sql);
+    $query->execute();
+    $results = $query->fetchAll(PDO::FETCH_OBJ);
 
-              <?php $cnt=$cnt+1;}} ?>  
-                               
-            </div>
-          </div>
-        <!--End Advanced Tables -->
+    if ($query->rowCount() > 0) {
+        ?>
+        <div class="row">
+            <?php
+            foreach ($results as $result) {
+            ?>
+                <div class="col-1-of-4">
+                    <div class="card">
+                        <img src="admin/bookimg/<?php echo htmlentities($result->bookImage); ?>" alt="<?php echo htmlentities($result->BookName); ?>" width="100%" height="200">
+                        <div class="card-body">
+                            <h3 class="card-title"><?php echo htmlentities($result->BookName); ?></h3>
+                            <p class="card-text">Author: <?php echo htmlentities($result->AuthorName); ?></p>
+                            <p class="card-text">Category: <?php echo htmlentities($result->CategoryName); ?></p>
+                            <p class="card-text">ISBN: <?php echo htmlentities($result->ISBNNumber); ?></p>
+                        </div>
+                    </div>
+                </div>
+            <?php
+            }
+            ?>
         </div>
-      </div>       
-    </div>
-  </div>
-</div>
+    <?php
+    } else {
+        echo "No results found";
+    }
+?>
 
      <!-- CONTENT-WRAPPER SECTION END-->
 <?php include('includes/footer.php');?>

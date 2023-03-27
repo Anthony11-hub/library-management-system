@@ -108,10 +108,7 @@ footer {
   max-width: 30px;
   margin: auto;
   text-align: center;
-}
-
-.card img {
-  
+  width: 100px;
 }
 
 .title {
