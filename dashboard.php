@@ -20,45 +20,19 @@ else{
     <meta name="author" content="" />
     <title>Online Library Management System | User Dash Board</title>
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
-    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
 <body>
-<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Library Management System</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-    <form class="form-inline">
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-  </form>
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Dashboard <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="issued-books.php">My Books</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="my-profile.php">Profile</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="change-password.php">Change Password</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="logout.php">Logout</a>
-      </li>
-    </ul>
-  </div>
-</nav> -->
-<header id="" class="header-2">
+    <header id="" class="header-2">
         <nav>
             <ul>
                 <li><a href="#">Home</a></li>
-                <li><a href="#">My Books</a></li>
-                <li><a href="#">Logout</a></li>
+                <li><a href="issued-books.php">My Books</a></li>
+                <li><a href="my-profile.php">Profile</a></li>
+                <li><a href="change-password.php">Change Password</a></li>
+                <li><a href="logout.php">Logout</a></li>
             </ul>
         </nav>
         <div class="wrap-2">
@@ -103,12 +77,15 @@ else{
                             <p class="card-text">Category: <?php echo htmlentities($result->CategoryName); ?></p>
                             <p class="card-text">ISBN: <?php echo htmlentities($result->ISBNNumber); ?></p>
                         </div>
+                        
                     </div>
+                    <a href="book-selected.php?bookid=<?php echo htmlentities($result->bookid);?>" class="button">view book</a>
                 </div>
             <?php
             }
             ?>
         </div>
+        
     <?php
     } else {
         echo "No results found";
