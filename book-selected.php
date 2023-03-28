@@ -28,37 +28,33 @@ else
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/recommends.css">
+    <!-- <link rel="stylesheet" href="assets/css/recommends.css"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/css/recommends.css">
+    <link rel="stylesheet" href="assets/css/select.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Document</title>
 </head>
 <body>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Library Management System</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="dashboard.php">Dashboard <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="issued-books.php">My Books</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="my-profile.php">Profile</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="change-password.php">Change Password</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="logout.php">Logout</a>
-      </li>
-  </div>
-</nav>
+<header id="" class="header-2">
+        <nav>
+            <ul>
+                <li><a href="dashboard.php">Home</a></li>
+                <li><a href="issued-books.php">My Books</a></li>
+                <li><a href="my-profile.php">Profile</a></li>
+                <li><a href="change-password.php">Change Password</a></li>
+                <li><a href="logout.php">Logout</a></li>
+            </ul>
+        </nav>
+        <div class="wrap-2">
+            <div class="search">
+                <input type="text" class="search__term" placeholder="what are you looking for?">
+                <button type="submit" class="search__button">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </header>
 
 <?php 
     $bookid=intval($_GET['bookid']);
@@ -73,7 +69,7 @@ else
     {
         foreach($results as $result)
         {               
-?>  
+    ?>  
 
   <!-- About Start -->
   <div class="container-fluid py-5" id="about">
@@ -86,22 +82,19 @@ else
                 <h3 class="mb-4">Book Decription</h3>
                 <p><?php echo htmlentities($result->BookPrice);?>.</p>
                 <div class="row mb-3">
-                    <div class="col-sm-6 py-2"><h6>Book Name: <span class="text-secondary"><?php echo htmlentities($result->BookName);?></span></h6></div>
-                    <div class="col-sm-6 py-2"><h6>Author: <span class="text-secondary"><?php echo htmlentities($athrname=$result->AuthorName);?></span></h6></div>
-                    <div class="col-sm-6 py-2"><h6>Category: <span class="text-secondary"><?php echo htmlentities($catname=$result->CategoryName);?></span></h6></div>
-                    <!-- <div class="col-sm-6 py-2"><h6>Experience: <span class="text-secondary">Not yet</span></h6></div> -->
-                    <div class="col-sm-6 py-2"><h6>ISBN: <span class="text-secondary"><?php echo htmlentities($result->ISBNNumber);?></span></h6></div>
+                    <div class="col-sm-6 py-2"><h6>Book Name: <span ><?php echo htmlentities($result->BookName);?></span></h6></div>
+                    <div class="col-sm-6 py-2"><h6>Author: <span ><?php echo htmlentities($athrname=$result->AuthorName);?></span></h6></div>
+                    <div class="col-sm-6 py-2"><h6>Category: <span ><?php echo htmlentities($catname=$result->CategoryName);?></span></h6></div>
+                    <!-- <div class="col-sm-6 py-2"><h6>Experience: <span >Not yet</span></h6></div> -->
+                    <div class="col-sm-6 py-2"><h6>ISBN: <span ><?php echo htmlentities($result->ISBNNumber);?></span></h6></div>
                     <?php if($result->isIssued=='1'): ?>
                     <div class="col-sm-6 py-2" style="color:red;"><h6>Availability: <span class="text-secondary">Book Issued</span></h6></div>
                     <?php endif;?>
-                   
-                    <!-- <div class="col-sm-6 py-2"><h6>Address: <span class="text-secondary">Nairobi, Kenya</span></h6></div>
-                    <div class="col-sm-6 py-2"><h6>Freelance: <span class="text-secondary">Available</span></h6></div>  -->
                 </div>
                 <?php }} ?>
                   
                 <?php if($result->Status=='1'): ?>
-                  <a href="<?php echo htmlentities($result->Link);?>" class="btn blue btn-outline-primary mr-4" target="_blank">Read Book</a>
+                  <a href="<?php echo htmlentities($result->Link);?>" class="btn blue btn-outline-primary mr-4" target="_blank">Read Ebook</a>
                 <?php endif;?>  
                 <a href="request-book.php" class="btn blue btn-outline-primary mr-4">Request Book</a>
             </div>
@@ -111,56 +104,45 @@ else
 
 
 
-<div class="reco">
   <h2>Other Books in This Category</h2>
-
-  <div class="row">
     <?php 
-    $bookid = intval($_GET['bookid']);
-    $sql = "SELECT c.CategoryName, a.AuthorName, b.id AS bookid, b.bookImage 
-    FROM tblbooks b 
-    JOIN tblcategory c ON c.id = b.CatId 
-    JOIN tblauthors a ON a.id = b.AuthorId 
-    WHERE c.id = (SELECT CatId FROM tblbooks WHERE id = $bookid) AND b.id != $bookid
-    LIMIT 5";
+    $sql = "SELECT tblbooks.BookName, tblcategory.CategoryName, tblauthors.AuthorName, tblbooks.id AS bookid, tblbooks.bookImage
+    FROM tblbooks 
+    JOIN tblcategory ON tblcategory.id = tblbooks.CatId 
+    JOIN tblauthors ON tblauthors.id = tblbooks.AuthorId 
+    WHERE tblcategory.id = (SELECT CatId FROM tblbooks WHERE id = $bookid) AND tblbooks.id != $bookid 
+    LIMIT 4";
     $query = $dbh->prepare($sql);
     $query->execute();
     $results = $query->fetchAll(PDO::FETCH_OBJ);
-    $cnt = 1;
 
-    if($query->rowCount() > 0)
-    {
-        foreach($results as $result)
-        {               
-          ?>
-          <div class="col-md-3">
-            <div class="card mb-3">
-              <img src="admin/bookimg/<?php echo htmlentities($result->bookImage);?>" class="card-img-top" alt="<?php echo htmlentities($result->AuthorName);?>">
-              <div class="card-body">
-                <h5 class="card-title"><?php echo htmlentities($result->AuthorName);?></h5>
-                <p class="card-subtitle"><?php echo htmlentities($result->CategoryName);?></p>
-                <a href="book-selected.php?bookid=<?php echo htmlentities($result->bookid);?>" class="btn btn-primary btn-block">View Book</a>
-              </div>
-            </div>
-          </div>
-          <?php 
-        }
-    }
-    else
-    {
+    if ($query->rowCount() > 0) {
         ?>
-        <div class="col-lg-12 col-md-12 col-sm-12">
-          <div class="card">
-            <div class="card-body">
-              No Recommendations Found
-            </div>
-          </div>
+        <div class="row">
+            <?php
+            foreach ($results as $result) {
+            ?>
+                <div class="col-1-of-4">
+                    <div class="card">
+                        <img src="admin/bookimg/<?php echo htmlentities($result->bookImage); ?>" alt="<?php echo htmlentities($result->BookName); ?>" width="100%" height="200">
+                        <div class="card-body">
+                            <h3 class="card-title">Title: <?php echo htmlentities($result->BookName); ?></h3>
+                            <p class="card-text">Author: <?php echo htmlentities($result->AuthorName); ?></p>
+                            <p class="card-text">Category: <?php echo htmlentities($result->CategoryName); ?></p>
+                        </div>
+                    </div>
+                    <a href="book-selected.php?bookid=<?php echo htmlentities($result->bookid);?>" class="button">view book</a>
+                </div>
+            <?php
+            }
+            ?>
         </div>
-        <?php 
-    } 
-    ?>                      
-  </div>
-</div>
+    <?php
+    } else {
+        echo "No results found";
+    }
+?>
+
 
 <footer>
   <h2>Library Management System</h2>

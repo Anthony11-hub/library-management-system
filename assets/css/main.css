@@ -250,6 +250,10 @@
     margin-bottom: 3rem;
 }
 
+.row .col-1-of-2 {
+  width: calc((100% - 6rem) / 2);
+}
+
 .card {
     background-color: #175D22;
     border-radius: 0.5rem;
