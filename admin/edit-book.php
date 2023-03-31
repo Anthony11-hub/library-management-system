@@ -163,7 +163,7 @@ continue;
 
 <div class="col-md-6">
  <div class="form-group">
- <label>Price in USD<span style="color:red;">*</span></label>
+ <label>Book Description<span style="color:red;">*</span></label>
  <input class="form-control" type="text" name="price" value="<?php echo htmlentities($result->BookPrice);?>"   required="required" />
  </div>
 </div>

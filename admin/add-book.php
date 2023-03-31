@@ -116,12 +116,12 @@ Book Info
 <div class="panel-body">
 <form role="form" method="post" enctype="multipart/form-data">
 
-<div class="col-md-6">   
-<div class="form-group">
-<label>Book Name<span style="color:red;">*</span></label>
-<input class="form-control" type="text" name="bookname" autocomplete="off"  required />
-</div>
-</div>
+    <div class="col-md-6">   
+    <div class="form-group">
+    <label>Book Name<span style="color:red;">*</span></label>
+    <input class="form-control" type="text" name="bookname" autocomplete="off"  required />
+    </div>
+    </div>
 
 <div class="col-md-6">  
 <div class="form-group">

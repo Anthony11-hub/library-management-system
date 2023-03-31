@@ -25,115 +25,101 @@ else{
     <!-- FONT AWESOME STYLE  -->
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <!-- DATATABLE STYLE  -->
-    <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    <!-- <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" /> -->
     <!-- CUSTOM STYLE  -->
-    <link href="assets/css/style.css" rel="stylesheet" />
+    <!-- <link href="assets/css/style.css" rel="stylesheet" /> -->
     <!-- GOOGLE FONT -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="assets/css/select.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
 <body>
       <!------MENU SECTION START-->
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Library Management System</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="dashboard.php">Dashboard <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="issued-books.php">My Books</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="my-profile.php">Profile</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="change-password.php">Change Password</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="logout.php">Logout</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-<!-- MENU SECTION END-->
-    <div class="content-wrapper">
-         <div class="container">
-        <div class="row pad-botm">
-            <div class="col-md-12">
-                <h4 class="header-line">Manage Issued Books</h4>
-    </div>
-    
-
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- Advanced Tables -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                          Issued Books 
-                        </div>
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Book Name</th>
-                                            <th>ISBN </th>
-                                            <th>Issued Date</th>
-                                            <th>Return Date</th>
-                                            <th>Fine in(USD)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-<?php 
-$sid=$_SESSION['stdid'];
-$sql="SELECT tblbooks.BookName,tblbooks.ISBNNumber,tblissuedbookdetails.IssuesDate,tblissuedbookdetails.ReturnDate,tblissuedbookdetails.id as rid,tblissuedbookdetails.fine from  tblissuedbookdetails join tblstudents on tblstudents.StudentId=tblissuedbookdetails.StudentId join tblbooks on tblbooks.id=tblissuedbookdetails.BookId where tblstudents.StudentId=:sid order by tblissuedbookdetails.id desc";
-$query = $dbh -> prepare($sql);
-$query-> bindParam(':sid', $sid, PDO::PARAM_STR);
-$query->execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
-$cnt=1;
-if($query->rowCount() > 0)
-{
-foreach($results as $result)
-{               ?>                                      
-                                        <tr class="odd gradeX">
-                                            <td class="center"><?php echo htmlentities($cnt);?></td>
-                                            <td class="center"><?php echo htmlentities($result->BookName);?></td>
-                                            <td class="center"><?php echo htmlentities($result->ISBNNumber);?></td>
-                                            <td class="center"><?php echo htmlentities($result->IssuesDate);?></td>
-                                            <td class="center"><?php if($result->ReturnDate=="")
-                                            {?>
-                                            <span style="color:red">
-                                             <?php   echo htmlentities("Not Return Yet"); ?>
-                                                </span>
-                                            <?php } else {
-                                            echo htmlentities($result->ReturnDate);
-                                        }
-                                            ?></td>
-                                              <td class="center"><?php echo htmlentities($result->fine);?></td>
-                                         
-                                        </tr>
- <?php $cnt=$cnt+1;}} ?>                                      
-                                    </tbody>
-                                </table>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <!--End Advanced Tables -->
-                </div>
+      <header id="" class="header-2">
+        <nav>
+            <ul>
+                <li><a href="dashboard.php">Home</a></li>
+                <li><a href="issued-books.php">My Books</a></li>
+                <li><a href="my-profile.php">Profile</a></li>
+                <li><a href="change-password.php">Change Password</a></li>
+                <li><a href="logout.php">Logout</a></li>
+            </ul>
+        </nav>
+        <div class="wrap-2">
+            <div class="search">
+                <input type="text" class="search__term" placeholder="what are you looking for?">
+                <button type="submit" class="search__button">
+                    <i class="fa fa-search"></i>
+                </button>
             </div>
+        </div>
+    </header>
 
 
-            
-    </div>
-    </div>
-    </div>
+<!-- MENU SECTION END-->
+
+                                  <?php 
+                                      $sid = $_SESSION['stdid'];
+                                      $sql = "SELECT 
+                                                tblbooks.BookName,
+                                                tblbooks.ISBNNumber,
+                                                tblissuedbookdetails.IssuesDate,
+                                                tblissuedbookdetails.ReturnDate,
+                                                tblissuedbookdetails.id as rid,
+                                                tblissuedbookdetails.fine
+                                              FROM 
+                                                tblissuedbookdetails 
+                                                JOIN 
+                                                  tblstudents ON tblstudents.StudentId = tblissuedbookdetails.StudentId 
+                                                JOIN 
+                                                  tblbooks ON tblbooks.id = tblissuedbookdetails.BookId 
+                                              WHERE 
+                                                tblstudents.StudentId = :sid 
+                                              ORDER BY 
+                                                tblissuedbookdetails.id DESC";
+                                      
+                                      $query = $dbh->prepare($sql);
+                                      $query->bindParam(':sid', $sid, PDO::PARAM_STR);
+                                      $query->execute();
+                                      $results = $query->fetchAll(PDO::FETCH_OBJ);
+                                      $cnt = 1;
+                                    //   BookName, ISDNNumber, IssuesDate
+                                      if ($query->rowCount() > 0) {
+                                          foreach ($results as $result) {
+                                  ?>   
+                                    <div class="container-fluid py-5" id="about">
+                                        <div class="container">
+                                            <div class="row align-items-center">
+                                                <div class="col-lg-7">
+                                                    <h3 class="mb-4"><?php echo htmlentities($result->BookName);?></h3>
+                                                    <div class="row mb-3">
+                                                
+                                                        <div class="col-sm-6 py-2"><h6>ISBN: <span ><?php echo htmlentities($result->ISBNNumber);?></span></h6></div>
+                                                        <div class="col-sm-6 py-2"><h6>Issue Date: <span ><?php echo htmlentities($result->IssuesDate);?></span></h6></div>
+                                                        <div class="col-sm-6 py-2"><h6>Return Date: <?php
+                                                                                                if ($result->ReturnDate == "") {
+                                                                                                ?>
+                                                                                                            <span style="color:red">
+                                                                                                                <?php echo htmlentities("Not Return Yet"); ?>
+                                                                                                            </span>
+                                                                                                <?php
+                                                                                                        } else {
+                                                                                                            echo htmlentities($result->ReturnDate);
+                                                                                                        }
+                                                                                                ?></h6></div>
+                                                        <div class="col-sm-6 py-2"><h6>Fine: <span ><?php echo htmlentities($result->fine);?></span></h6></div>
+
+                                                        <?php if($result->isIssued=='1'): ?>
+                                                        <div class="col-sm-6 py-2" style="color:red;"><h6>Availability: <span class="text-secondary">Book Issued</span></h6></div>
+                                                        <?php endif;?>
+                                                    </div>
+                                                    <?php }} ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                                   
+                                         
 
      <!-- CONTENT-WRAPPER SECTION END-->
   <?php include('includes/footer.php');?>

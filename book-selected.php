@@ -126,9 +126,8 @@ else
                     <div class="card">
                         <img src="admin/bookimg/<?php echo htmlentities($result->bookImage); ?>" alt="<?php echo htmlentities($result->BookName); ?>" width="100%" height="200">
                         <div class="card-body">
-                            <h3 class="card-title">Title: <?php echo htmlentities($result->BookName); ?></h3>
+                            <h3 class="card-title"><?php echo htmlentities($result->BookName); ?></h3>
                             <p class="card-text">Author: <?php echo htmlentities($result->AuthorName); ?></p>
-                            <p class="card-text">Category: <?php echo htmlentities($result->CategoryName); ?></p>
                         </div>
                     </div>
                     <a href="book-selected.php?bookid=<?php echo htmlentities($result->bookid);?>" class="button">view book</a>
