@@ -45,7 +45,7 @@ header('location:dashboard.php');
     <!-- FONT AWESOME STYLE  -->
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <!-- CUSTOM STYLE  -->
-    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="assets/css/select.css" rel="stylesheet" />
     <!-- GOOGLE FONT -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <script>
@@ -91,30 +91,48 @@ header('location:dashboard.php');
 </head>
 <body>
       <!------MENU SECTION START-->
-<?php include('includes/header.php');?>
+      <header id="" class="header-2">
+        <nav>
+            <ul>
+                <li><a href="dashboard.php">Home</a></li>
+                <li><a href="issued-books.php">My Books</a></li>
+                <li><a href="my-profile.php">Profile</a></li>
+                <li><a href="change-password.php">Change Password</a></li>
+                <li><a href="logout.php">Logout</a></li>
+            </ul>
+        </nav>
+        <div class="wrap-2">
+            <div class="search">
+                <input type="text" class="search__term" placeholder="what are you looking for?">
+                <button type="submit" class="search__button">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </header>
 <!-- MENU SECTION END-->
 <div class="container">
-  <div class="row pad-botm">
+  <div class="row pad-botm" style="margin-bottom:20px;">
     <h4>Issue a New Book</h4>
   </div>
   <div class="row">
     <div class="col-md-10 col-sm-6 col-xs-12 col-md-offset-1">
-      <div class="panel panel-info">
-        <div class="panel-heading">
+      <div >
+        <div class="panel-heading" style="font-size:40px;">
           Request book
         </div>
         <div class="panel-body">
           <form role="form" method="post">
             <div class="form-group">
-              <label for="studentid">Your Student ID<span style="color:red;">*</span></label>
-              <input class="form-control" type="text" name="studentid" id="studentid" onBlur="getstudent()" autocomplete="off" required />
+              <label for="studentid" >Your Student ID<span style="color:red;">*</span></label>
+              <input style="width: 80%" class="form-control" type="text" name="studentid" id="studentid" onBlur="getstudent()" autocomplete="off" required />
             </div>
             <div class="form-group">
               <span id="get_student_name" style="font-size:16px;"></span> 
             </div>
             <div class="form-group">
-              <label for="bookid">ISBN Number or Book Title<span style="color:red;">*</span></label>
-              <input class="form-control" type="text" name="bookid" id="bookid" onBlur="getbook()" required />
+              <label for="bookid" >ISBN Number or Book Title<span style="color:red;">*</span></label>
+              <input style="width: 80%" class="form-control" type="text" name="bookid" id="bookid" onBlur="getbook()" required />
             </div>
             <div class="form-group" id="get_book_name"></div>
             <button type="submit" name="issue" id="submit" class="btn btn-info">Issue Book</button>

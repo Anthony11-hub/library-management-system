@@ -17,7 +17,7 @@ $isbn=$_POST['isbn'];
 $price=$_POST['price'];
 $bookid=intval($_GET['bookid']);
 
-$sql="update  tblbooks set BookName=:bookname,CatId=:category,AuthorId=:author,BookPrice=:price, where id=:bookid";
+$sql="update tblbooks set BookName=:bookname,CatId=:category,AuthorId=:author,BookPrice=:price where id=:bookid";
 $query = $dbh->prepare($sql);
 $query->bindParam(':bookname',$bookname,PDO::PARAM_STR);
 $query->bindParam(':category',$category,PDO::PARAM_STR);

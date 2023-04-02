@@ -25,7 +25,6 @@
           <ul class="dropdown-menu">
             <li><a href="add-category.php">Add Category</a></li>
             <li><a href="manage-categories.php">Manage Categories</a></li>
-            <li><a href="add-keywords.php">Add Keywords</a></li>
           </ul>
         </li>
 

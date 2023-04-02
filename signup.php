@@ -2,25 +2,31 @@
 session_start();
 include('includes/config.php');
 error_reporting(0);
+
+function generateRandomString($length = 6) {
+  $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  $charLength = strlen($characters);
+  $randomString = '';
+  for ($i = 0; $i < $length; $i++) {
+      $randomString .= $characters[rand(0, $charLength - 1)];
+  }
+  return $randomString;
+}
+
+
 if(isset($_POST['signup']))
 {
- 
-//Code for student ID
-$count_my_page = ("studentid.txt");
-$hits = file($count_my_page);
-$hits[0] ++;
-$fp = fopen($count_my_page , "w");
-fputs($fp , "$hits[0]");
-fclose($fp); 
-$StudentId= $hits[0];   
-$fname=$_POST['fullname'];
+$forgotPin=generateRandomString(); 
+$StudentId=$_POST['StudentId'];  
+$fname=$_POST['fname'];
 $mobileno=$_POST['mobileno'];
 $email=$_POST['email']; 
 $password=md5($_POST['password']); 
 $status=1;
-$sql="INSERT INTO  tblstudents(StudentId,FullName,MobileNumber,EmailId,Password,Status) VALUES(:StudentId,:fname,:mobileno,:email,:password,:status)";
+$sql="INSERT INTO  tblstudents(forgotPin,StudentId,FullName,MobileNumber,EmailId,Password,Status) VALUES(:forgotPin,:StudentId,:fname,:mobileno,:email,:password,:status)";
 $query = $dbh->prepare($sql);
 $query->bindParam(':StudentId',$StudentId,PDO::PARAM_STR);
+$query->bindParam(':forgotPin',$forgotPin,PDO::PARAM_STR);
 $query->bindParam(':fname',$fname,PDO::PARAM_STR);
 $query->bindParam(':mobileno',$mobileno,PDO::PARAM_STR);
 $query->bindParam(':email',$email,PDO::PARAM_STR);
@@ -30,7 +36,7 @@ $query->execute();
 $lastInsertId = $dbh->lastInsertId();
 if($lastInsertId)
 {
-echo '<script>alert("Your Registration successfull and your student id is  "+"'.$StudentId.'")</script>';
+echo '<script>alert("Your Registration successfull and your reset password pin is  "+"'.$forgotPin.'")</script>';
 }
 else 
 {
@@ -154,13 +160,18 @@ error:function (){}
             <h1>User Sign Up</h1>
             <form name="signup" method="post" onSubmit="return valid();">
             <div class="form-control">
-                <input type="text" name="emailid" id="emailid" required>
+                <input type="text" name="fname" id="fname" required>
                 <label> Enter Full Name</label>
               </div>  
 
               <div class="form-control">
-                <input type="text" name="mobileno" maxlength="10" autocomplete="off" required >
+                <input type="text" name="mobileno"  autocomplete="off" required >
                 <label> Mobile Number</label>
+              </div>
+
+              <div class="form-control">
+                <input type="text" name="StudentId"  autocomplete="off" required >
+                <label> Student Registration</label>
               </div>
 
             <div class="form-control">
@@ -177,9 +188,8 @@ error:function (){}
                 <input type="password" name="confirmpassword" autocomplete="off" required  >
                 <label>Confirm Password</label>
               </div>
-			  <!-- <input type="submit" name="login_button" class="login-btn" value="Login" /> -->
+
               <button  type="submit" name="signup" id="submit" class="login-btn">Login</button>
-              <!-- <a href="user-forgot-password.php">forgot Passsword</a> -->
               <p class="text">Already have an account? <a href="user-login.php">Login</a></p>
 			  <a href="index.php">library_management</a>
             </form>

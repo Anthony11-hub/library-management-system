@@ -47,7 +47,8 @@ $error="Your current password is wrong";
     <!-- FONT AWESOME STYLE  -->
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <!-- CUSTOM STYLE  -->
-    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="assets/css/select.css" rel="stylesheet" />
+    <!-- <link rel="stylesheet" href="assets/css/profile.css"> -->
     <!-- GOOGLE FONT -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
   <style>
@@ -84,31 +85,25 @@ return true;
 
 <body>
     <!------MENU SECTION START-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Library Management System</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="dashboard.php">Dashboard <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="issued-books.php">My Books</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="my-profile.php">Profile</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="change-password.php">Change Password</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="logout.php">Logout</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+    <header id="" class="header-2">
+        <nav>
+            <ul>
+                <li><a href="dashboard.php">Home</a></li>
+                <li><a href="issued-books.php">My Books</a></li>
+                <li><a href="my-profile.php">Profile</a></li>
+                <li><a href="change-password.php">Change Password</a></li>
+                <li><a href="logout.php">Logout</a></li>
+            </ul>
+        </nav>
+        <div class="wrap-2">
+            <div class="search">
+                <input type="text" class="search__term" placeholder="what are you looking for?">
+                <button type="submit" class="search__button">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </header>
 <!-- MENU SECTION END-->
 <div class="content-wrapper">
 <div class="container">
@@ -130,26 +125,31 @@ Change Password
 <form role="form" method="post" onSubmit="return valid();" name="chngpwd">
 
 <div class="form-group">
-<label>Current Password</label>
+<label style="color:black;">Current Password</label>
 <input class="form-control" type="password" name="password" autocomplete="off" required  />
 </div>
 
 <div class="form-group">
-<label>Enter Password</label>
+<label style="color:black;">Enter new Password</label>
 <input class="form-control" type="password" name="newpassword" autocomplete="off" required  />
 </div>
 
 <div class="form-group">
-<label>Confirm Password </label>
+<label style="color:black;">Confirm Password </label>
 <input class="form-control"  type="password" name="confirmpassword" autocomplete="off" required  />
 </div>
 
- <button type="submit" name="change" class="btn btn-info">Chnage </button> 
+ <button type="submit" name="change" class="btn btn-info">Change </button> 
 </form>
  </div>
 </div>
 </div>
 </div>  
+<!---LOGIN PABNEL END-->            
+             
+ 
+    </div>
+    </div>
 <!---LOGIN PABNEL END-->            
              
  

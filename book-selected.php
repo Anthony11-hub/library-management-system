@@ -104,7 +104,7 @@ else
 
 
 
-  <h2>Other Books in This Category</h2>
+  <h2 style="margin-left:70px;">You might also like</h2>
     <?php 
     $sql = "SELECT tblbooks.BookName, tblcategory.CategoryName, tblauthors.AuthorName, tblbooks.id AS bookid, tblbooks.bookImage
     FROM tblbooks 
