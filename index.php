@@ -51,7 +51,7 @@ include('includes/config.php');
     <?php
     $sql = "
         SELECT tblbooks.BookName, tblcategory.CategoryName, tblauthors.AuthorName, 
-            tblbooks.ISBNNumber, tblbooks.BookPrice, tblbooks.id AS bookid, 
+            tblbooks.ISBNNumber, tblbooks.id AS bookid, 
             tblbooks.bookImage, tblbooks.isIssued 
         FROM tblbooks 
         JOIN tblcategory ON tblcategory.id = tblbooks.CatId 

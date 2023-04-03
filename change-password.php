@@ -47,7 +47,7 @@ $error="Your current password is wrong";
     <!-- FONT AWESOME STYLE  -->
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <!-- CUSTOM STYLE  -->
-    <link href="assets/css/select.css" rel="stylesheet" />
+    <link href="assets/css/book.css" rel="stylesheet" />
     <!-- <link rel="stylesheet" href="assets/css/profile.css"> -->
     <!-- GOOGLE FONT -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />

@@ -45,7 +45,7 @@ header('location:dashboard.php');
     <!-- FONT AWESOME STYLE  -->
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <!-- CUSTOM STYLE  -->
-    <link href="assets/css/select.css" rel="stylesheet" />
+    <link href="assets/css/book.css" rel="stylesheet" />
     <!-- GOOGLE FONT -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <script>
@@ -113,7 +113,7 @@ header('location:dashboard.php');
 <!-- MENU SECTION END-->
 <div class="container">
   <div class="row pad-botm" style="margin-bottom:20px;">
-    <h4>Issue a New Book</h4>
+    <h4>Input Book Details</h4>
   </div>
   <div class="row">
     <div class="col-md-10 col-sm-6 col-xs-12 col-md-offset-1">
@@ -135,7 +135,7 @@ header('location:dashboard.php');
               <input style="width: 80%" class="form-control" type="text" name="bookid" id="bookid" onBlur="getbook()" required />
             </div>
             <div class="form-group" id="get_book_name"></div>
-            <button type="submit" name="issue" id="submit" class="btn btn-info">Issue Book</button>
+            <button type="submit" name="issue" id="submit" class="btn btn-info">Request Book</button>
           </form>
         </div>
       </div>

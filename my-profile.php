@@ -32,17 +32,14 @@ echo '<script>alert("Your profile has been updated")</script>';
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <!--[if IE]>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <![endif]-->
     <title>Online Library Management System | Student Signup</title>
     <!-- BOOTSTRAP CORE STYLE  -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FONT AWESOME STYLE  -->
-    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <!-- <link href="assets/css/font-awesome.css" rel="stylesheet" /> -->
     <!-- CUSTOM STYLE  -->
-    <link href="assets/css/select.css" rel="stylesheet" />
+    <!-- <link href="assets/css/select.css" rel="stylesheet" /> -->
     <!-- GOOGLE FONT -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' /> 
     <link rel="stylesheet" href="assets/css/profile.css">
@@ -71,21 +68,6 @@ echo '<script>alert("Your profile has been updated")</script>';
     </header>
 <!-- MENU SECTION END-->
 
-<div class="content-wrapper">
-  <div class="container">
-    <div class="row pad-botm">
-      <div class="col-md-12">
-        <h4 class="header-line">My Profile</h4>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-9 col-md-offset-1">
-        <div class="panel panel-danger">
-          <div class="panel-heading">
-            My Profile
-          </div>
-          <div class="panel-body">
-            <form name="signup" method="post">
               <?php 
               $sid=$_SESSION['stdid'];
               $sql="SELECT StudentId,FullName,forgotPin,EmailId,MobileNumber,RegDate,UpdationDate,Status from  tblstudents where StudentId=:sid ";
@@ -95,58 +77,43 @@ echo '<script>alert("Your profile has been updated")</script>';
               $results=$query->fetchAll(PDO::FETCH_OBJ);
               if($query->rowCount() > 0) {
                 foreach($results as $result) { ?>  
-                  <div class="form-group">
-                    <label>Student ID :</label>
-                    <input class="form-control" type="text" name="studentid" value="<?php echo htmlentities($result->StudentId);?>" autocomplete="off" required />
-                    
-                  </div>
-                  <div class="form-group">
-                    <label>Reg Date :</label>
-                    <?php echo htmlentities($result->RegDate);?>
-                  </div>
-                  <div class="form-group">
-                    <label>Personal Access Pin :</label>
-                    <?php echo htmlentities($result->forgotPin);?>
-                  </div>
-                  <?php if($result->UpdationDate!=""){?>
-                    <div class="form-group">
-                      <label>Last Updation Date :</label>
-                      <?php echo htmlentities($result->UpdationDate);?>
-                    </div>
-                  <?php } ?>
-                  <div class="form-group">
-                    <label>Profile Status :</label>
-                    <?php if($result->Status==1){?>
-                      <span style="color: green">Active</span>
-                    <?php } else { ?>
-                      <span style="color: red">Blocked</span>
-                    <?php }?>
-                  </div>
-                  <div class="form-group">
-                    <label>Enter Full Name</label>
-                    <input class="form-control" type="text" name="fullanme" value="<?php echo htmlentities($result->FullName);?>" autocomplete="off" required />
-                  </div>
-                  <div class="form-group">
-                    <label>Mobile Number :</label>
-                    <input class="form-control" type="text" name="mobileno" maxlength="10" value="<?php echo htmlentities($result->MobileNumber);?>" autocomplete="off" required />
-                  </div>
-                  <div class="form-group">
-                    <label>Enter Email</label>
-                    <input class="form-control" type="email" name="email" id="emailid" value="<?php echo htmlentities($result->EmailId);?>"  autocomplete="off" required readonly />
-                  </div>
-                <?php }
+                    <div class="content-profile-page">
+                      <div class="profile-user-page card">
+                        <div class="img-user-profile">
+                          <img class="profile-bgHome" src="https://imgs.search.brave.com/NVCz9FAgFYUkTO86V5vTpzi55uNSStF0MWw5t7M4iQs/rs:fit:1200:600:1/g:ce/aHR0cDovL3d3dy5s/YW1iZXJ0Z3JvdXBw/cm9kdWN0aW9ucy5j/b20vY2FueW9uL3dv/cmRwcmVzc19mdWxs/X3NjcmVlbl9iYWNr/Z3JvdW5kL2ltYWdl/cy9idWxsZXRzRnVs/bFdpZHRoLzAzX2J1/bGxldHMuanBn" />
+                          <img class="avatar" src="https://imgs.search.brave.com/c1pvt2EsKHGzSE6jbSF8bvQHN2z7rS8ZYyA80D-ZLNM/rs:fit:800:836:1/g:ce/aHR0cHM6Ly9wdXJl/cG5nLmNvbS9wdWJs/aWMvdXBsb2Fkcy9s/YXJnZS9wdXJlcG5n/LmNvbS1zdHVkZW50/c3N0dWRlbnRjb2xs/ZWdlLXN0dWRlbnRz/Y2hvb2wtc3R1ZGVu/dHN0dWRlbnRzbWFs/ZS1mZW1hbGUtMTQy/MTUyNjkyNDE2MnNw/MHNmLnBuZw" alt="jofpin"/>
+                              </div>
+                            <div class="user-profile-data">
+                              <h1><?php echo htmlentities($result->FullName);?></h1>
+                              <p>Profile Status : <?php if($result->Status==1){?>
+                                <span style="color: green">Active</span>
+                              <?php } else { ?>
+                                <span style="color: red">Blocked</span>
+                              <?php }?></p>
+                              <p>Personal Access Token: <?php echo htmlentities($result->forgotPin);?></p>
+                              <p>Student ID: <?php echo htmlentities($result->StudentId);?></p>
+                            </div> 
+                            <div class="description-profile">Reg Date : <?php echo htmlentities($result->RegDate);?></div>
+                            <div class="description-profile">Last Updation Date : 2023-04-02 17:31:20</div>
+                            <div id="container" align="center">
+                              <form name="signup" method="post">
+                                <input class="profile-input" type="text" type="text" name="fullanme" value="<?php echo htmlentities($result->FullName);?>" autocomplete="off" required>
+                                <input class="profile-input" type="text" name="mobileno" value="<?php echo htmlentities($result->MobileNumber);?>" autocomplete="off" required >
+                                <input class="profile-input" type="text" name="email" id="emailid" value="<?php echo htmlentities($result->EmailId);?>"  autocomplete="off" required readonly>
+                                <!-- <label for="image">Select an image:</label>
+                                <input type="file" name="image" id="image"> -->
+                                <button class="profile-input-button" type="submit" name="update">Update Details</button>
+                              </form>
+                            </div>
+                        </div>
+                      </div>
+                      <?php }
               } ?>
-              <button type="submit" name="update" class="btn btn-primary" id="submit">Update Now </button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+              <footer>
+    <p class="heading-primary--sub" style="margin-top:200px;">library Management System</p>
+</footer>
 
      <!-- CONTENT-WRAPPER SECTION END-->
-    <?php include('includes/footer.php');?>
     <script src="assets/js/jquery-1.10.2.js"></script>
     <!-- BOOTSTRAP SCRIPTS  -->
     <script src="assets/js/bootstrap.js"></script>

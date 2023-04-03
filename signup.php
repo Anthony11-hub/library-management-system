@@ -66,18 +66,27 @@ echo "<script>alert('Something went wrong. Please try again');</script>";
     <!-- <link href="assets/css/style.css" rel="stylesheet" /> -->
     <!-- GOOGLE FONT -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-<script type="text/javascript">
-function valid()
-{
-if(document.signup.password.value!= document.signup.confirmpassword.value)
-{
-alert("Password and Confirm Password Field do not match  !!");
-document.signup.confirmpassword.focus();
-return false;
-}
-return true;
+    <script type="text/javascript">
+function valid() {
+  if (document.signup.password.value != document.signup.confirmpassword.value) {
+    alert("Password and Confirm Password Field do not match  !!");
+    document.signup.confirmpassword.focus();
+    return false;
+  }
+  
+  // Password validation
+  var password = document.signup.password.value;
+  var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+  if (!passwordRegex.test(password)) {
+    alert("Password should contain at least 8 characters, including 1 lowercase letter, 1 uppercase letter, and 1 number.");
+    document.signup.password.focus();
+    return false;
+  }
+  
+  return true;
 }
 </script>
+
 <script>
 function checkAvailability() {
 $("#loaderIcon").show();
