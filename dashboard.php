@@ -24,6 +24,29 @@ else{
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
+<script>
+    function searchBooks() {
+    // Get the search query from the input field
+    var searchQuery = document.getElementById("search-input").value.toLowerCase();
+
+    // Get all the book cards
+    var bookCards = document.getElementsByClassName("col-1-of-4");
+
+    // Loop through all the book cards and hide/show them based on the search query
+    for (var i = 0; i < bookCards.length; i++) {
+        var bookName = bookCards[i].querySelector(".card-title").innerText.toLowerCase();
+        var authorName = bookCards[i].querySelector(".card-text:first-of-type").innerText.toLowerCase();
+        var category = bookCards[i].querySelector(".card-text:last-of-type").innerText.toLowerCase();
+
+        if (bookName.indexOf(searchQuery) > -1 || authorName.indexOf(searchQuery) > -1 || category.indexOf(searchQuery) > -1) {
+            bookCards[i].style.display = "block";
+        } else {
+            bookCards[i].style.display = "none";
+        }
+    }
+}
+
+</script>
 <body>
     <header id="" class="header-2">
         <nav>
@@ -36,9 +59,9 @@ else{
             </ul>
         </nav>
         <div class="wrap-2">
-            <div class="search">
-                <input type="text" class="search__term" placeholder="what are you looking for?">
-                <button type="submit" class="search__button">
+        <div class="search">
+                <input type="text" id="search-input" class="search__term" placeholder="what are you looking for?" onkeyup="if (event.keyCode === 13) { searchBooks(); }">
+                <button type="submit" class="search__button" onclick="searchBooks()">
                     <i class="fa fa-search"></i>
                 </button>
             </div>
@@ -53,7 +76,7 @@ else{
 <?php
     $sql = "
         SELECT tblbooks.BookName, tblcategory.CategoryName, tblauthors.AuthorName, 
-            tblbooks.ISBNNumber, tblbooks.BookPrice, tblbooks.id AS bookid, 
+            tblbooks.ISBNNumber, tblbooks.BookDescription, tblbooks.id AS bookid, 
             tblbooks.bookImage, tblbooks.isIssued 
         FROM tblbooks 
         JOIN tblcategory ON tblcategory.id = tblbooks.CatId 

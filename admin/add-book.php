@@ -14,7 +14,7 @@ $bookname=$_POST['bookname'];
 $category=$_POST['category'];
 $author=$_POST['author'];
 $isbn=$_POST['isbn'];
-$price=$_POST['price'];
+$BookDescription=$_POST['BookDescription'];
 $bookimg=$_FILES["bookpic"]["name"];
 
 $link=$_POST['link'];
@@ -35,13 +35,13 @@ echo "<script>alert('Invalid format. Only jpg / jpeg/ png /gif format allowed');
 else
 {
 move_uploaded_file($_FILES["bookpic"]["tmp_name"],"bookimg/".$imgnewname);
-$sql="INSERT INTO  tblbooks(BookName,CatId,AuthorId,ISBNNumber,BookPrice,bookImage, Link, Status) VALUES(:bookname,:category,:author,:isbn,:price,:imgnewname, :link, :status)";
+$sql="INSERT INTO  tblbooks(BookName,CatId,AuthorId,ISBNNumber,BookDescription,bookImage, Link, Status) VALUES(:bookname,:category,:author,:isbn,:BookDescription,:imgnewname, :link, :status)";
 $query = $dbh->prepare($sql);
 $query->bindParam(':bookname',$bookname,PDO::PARAM_STR);
 $query->bindParam(':category',$category,PDO::PARAM_STR);
 $query->bindParam(':author',$author,PDO::PARAM_STR);
 $query->bindParam(':isbn',$isbn,PDO::PARAM_STR);
-$query->bindParam(':price',$price,PDO::PARAM_STR);
+$query->bindParam(':BookDescription',$BookDescription,PDO::PARAM_STR);
 $query->bindParam(':imgnewname',$imgnewname,PDO::PARAM_STR);
 
 $query->bindParam(':link',$link,PDO::PARAM_STR);
@@ -176,8 +176,8 @@ foreach($results as $result)
 
 <div class="col-md-6">  
  <div class="form-group">
- <label>Price<span style="color:red;">*</span></label>
- <input class="form-control" type="text" name="price" autocomplete="off"   required="required" />
+ <label>Book Description<span style="color:red;">*</span></label>
+ <input class="form-control" type="text" name="BookDescription" autocomplete="off"   required="required" />
  </div>
 </div>
 

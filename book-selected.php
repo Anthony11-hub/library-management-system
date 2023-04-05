@@ -15,7 +15,7 @@ else
         $category=$_POST['category'];
         $author=$_POST['author'];
         $isbn=$_POST['isbn'];
-        $price=$_POST['price'];
+        $BookDescription=$_POST['BookDescription'];
         $bookid=intval($_GET['bookid']);
         $keywords=$_POST['keywords'];
         $studentid=intval($_GET['studentid']);
@@ -30,7 +30,7 @@ else
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="assets/css/recommends.css"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/css/select.css">
+    <link rel="stylesheet" href="assets/css/book.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Document</title>
 </head>
@@ -58,7 +58,7 @@ else
 
 <?php 
     $bookid=intval($_GET['bookid']);
-    $sql = "SELECT tblbooks.BookName,tblcategory.CategoryName,tblcategory.id as cid,tblauthors.AuthorName,tblauthors.id as athrid,tblbooks.ISBNNumber,tblbooks.BookPrice,tblbooks.id as bookid,tblbooks.bookImage,tblbooks.isIssued, tblbooks.Status, tblbooks.Link from  tblbooks join tblcategory on tblcategory.id=tblbooks.CatId join tblauthors on tblauthors.id=tblbooks.AuthorId where tblbooks.id=:bookid";
+    $sql = "SELECT tblbooks.BookName,tblcategory.CategoryName,tblcategory.id as cid,tblauthors.AuthorName,tblauthors.id as athrid,tblbooks.ISBNNumber,tblbooks.BookDescription,tblbooks.id as bookid,tblbooks.bookImage,tblbooks.isIssued, tblbooks.Status, tblbooks.Link from  tblbooks join tblcategory on tblcategory.id=tblbooks.CatId join tblauthors on tblauthors.id=tblbooks.AuthorId where tblbooks.id=:bookid";
     $query = $dbh -> prepare($sql);
     $query->bindParam(':bookid',$bookid,PDO::PARAM_STR);
     $query->execute();
@@ -80,7 +80,7 @@ else
             </div>
             <div class="col-lg-7">
                 <h3 class="mb-4">Book Decription</h3>
-                <p><?php echo htmlentities($result->BookPrice);?>.</p>
+                <p><?php echo htmlentities($result->BookDescription);?>.</p>
                 <div class="row mb-3">
                     <div class="col-sm-6 py-2"><h6>Book Name: <span ><?php echo htmlentities($result->BookName);?></span></h6></div>
                     <div class="col-sm-6 py-2"><h6>Author: <span ><?php echo htmlentities($athrname=$result->AuthorName);?></span></h6></div>
@@ -104,7 +104,7 @@ else
 
 
 
-  <h2>Other Books in This Category</h2>
+  <h2 style="margin-left:70px;">You might also like</h2>
     <?php 
     $sql = "SELECT tblbooks.BookName, tblcategory.CategoryName, tblauthors.AuthorName, tblbooks.id AS bookid, tblbooks.bookImage
     FROM tblbooks 

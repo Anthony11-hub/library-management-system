@@ -2,25 +2,31 @@
 session_start();
 include('includes/config.php');
 error_reporting(0);
+
+function generateRandomString($length = 6) {
+  $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  $charLength = strlen($characters);
+  $randomString = '';
+  for ($i = 0; $i < $length; $i++) {
+      $randomString .= $characters[rand(0, $charLength - 1)];
+  }
+  return $randomString;
+}
+
+
 if(isset($_POST['signup']))
 {
- 
-//Code for student ID
-$count_my_page = ("studentid.txt");
-$hits = file($count_my_page);
-$hits[0] ++;
-$fp = fopen($count_my_page , "w");
-fputs($fp , "$hits[0]");
-fclose($fp); 
-$StudentId= $hits[0];   
-$fname=$_POST['fullname'];
+$forgotPin=generateRandomString(); 
+$StudentId=$_POST['StudentId'];  
+$fname=$_POST['fname'];
 $mobileno=$_POST['mobileno'];
 $email=$_POST['email']; 
 $password=md5($_POST['password']); 
 $status=1;
-$sql="INSERT INTO  tblstudents(StudentId,FullName,MobileNumber,EmailId,Password,Status) VALUES(:StudentId,:fname,:mobileno,:email,:password,:status)";
+$sql="INSERT INTO  tblstudents(forgotPin,StudentId,FullName,MobileNumber,EmailId,Password,Status) VALUES(:forgotPin,:StudentId,:fname,:mobileno,:email,:password,:status)";
 $query = $dbh->prepare($sql);
 $query->bindParam(':StudentId',$StudentId,PDO::PARAM_STR);
+$query->bindParam(':forgotPin',$forgotPin,PDO::PARAM_STR);
 $query->bindParam(':fname',$fname,PDO::PARAM_STR);
 $query->bindParam(':mobileno',$mobileno,PDO::PARAM_STR);
 $query->bindParam(':email',$email,PDO::PARAM_STR);
@@ -30,7 +36,7 @@ $query->execute();
 $lastInsertId = $dbh->lastInsertId();
 if($lastInsertId)
 {
-echo '<script>alert("Your Registration successfull and your student id is  "+"'.$StudentId.'")</script>';
+echo '<script>alert("Your Registration successfull and your reset password pin is  "+"'.$forgotPin.'")</script>';
 }
 else 
 {
@@ -61,15 +67,24 @@ echo "<script>alert('Something went wrong. Please try again');</script>";
     <!-- GOOGLE FONT -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 <script type="text/javascript">
-function valid()
-{
-if(document.signup.password.value!= document.signup.confirmpassword.value)
-{
-alert("Password and Confirm Password Field do not match  !!");
-document.signup.confirmpassword.focus();
-return false;
-}
-return true;
+function valid() {
+  const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirmpassword").value;
+
+  if (password !== confirmPassword) {
+    alert("Password and Confirm Password Field do not match!!");
+    document.getElementById("confirmpassword").focus();
+    return false;
+  }
+
+  const passwordStrength = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/;
+  if (!passwordStrength.test(password)) {
+    alert("Password must contain at least 8 characters including at least one uppercase letter, one lowercase letter, one number, and one special character (!@#$%^&*)");
+    document.getElementById("password").focus();
+    return false;
+  }
+
+  return true;
 }
 </script>
 <script>
@@ -90,77 +105,24 @@ error:function (){}
 
 </head>
 <body>
-    <!------MENU SECTION START-->
-<!-- MENU SECTION END-->
-    <!-- <div class="content-wrapper">
-         <div class="container">
-        <div class="row pad-botm">
-            <div class="col-md-12">
-                <h4 class="header-line">User Signup</h4>
-                
-                            </div>
-
-        </div>
-             <div class="row">
-           
-<div class="col-md-9 col-md-offset-1">
-               <div class="panel panel-danger">
-                        <div class="panel-heading">
-                           SINGUP FORM
-                        </div>
-                        <div class="panel-body">
-                            <form name="signup" method="post" onSubmit="return valid();">
-<div class="form-group">
-<label>Enter Full Name</label>
-<input class="form-control" type="text" name="fullname" autocomplete="off" required />
-</div>
-
-
-<div class="form-group">
-<label>Mobile Number :</label>
-<input class="form-control" type="text" name="mobileno" maxlength="10" autocomplete="off" required />
-</div>
-                                        
-<div class="form-group">
-<label>Enter Email</label>
-<input class="form-control" type="email" name="email" id="emailid" onBlur="checkAvailability()"  autocomplete="off" required  />
-   <span id="user-availability-status" style="font-size:12px;"></span> 
-</div>
-
-<div class="form-group">
-<label>Enter Password</label>
-<input class="form-control" type="password" name="password" autocomplete="off" required  />
-</div>
-
-<div class="form-group">
-<label>Confirm Password </label>
-<input class="form-control"  type="password" name="confirmpassword" autocomplete="off" required  />
-</div>
-                             
-<button type="submit" name="signup" class="btn btn-danger" id="submit">Register Now </button>
-
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div> -->
-
-
     <div class="login-form-bd">
         <div class="form-wrapper">
           <div class="form-container">
             <h1>User Sign Up</h1>
             <form name="signup" method="post" onSubmit="return valid();">
             <div class="form-control">
-                <input type="text" name="emailid" id="emailid" required>
+                <input type="text" name="fname" id="fname" required>
                 <label> Enter Full Name</label>
               </div>  
 
               <div class="form-control">
-                <input type="text" name="mobileno" maxlength="10" autocomplete="off" required >
+                <input type="text" name="mobileno"  autocomplete="off" required >
                 <label> Mobile Number</label>
+              </div>
+
+              <div class="form-control">
+                <input type="text" name="StudentId"  autocomplete="off" required >
+                <label> Student Registration</label>
               </div>
 
             <div class="form-control">
@@ -169,17 +131,16 @@ error:function (){}
               </div>
       
               <div class="form-control">
-                <input  type="password" name="password" autocomplete="off" required  >
+                <input  type="password" name="password" autocomplete="off" id="password" required  >
                 <label> Password</label>
               </div>
 
               <div class="form-control">
-                <input type="password" name="confirmpassword" autocomplete="off" required  >
+                <input type="password" name="confirmpassword" autocomplete="off" id="confirmpassword" required  >
                 <label>Confirm Password</label>
               </div>
-			  <!-- <input type="submit" name="login_button" class="login-btn" value="Login" /> -->
+
               <button  type="submit" name="signup" id="submit" class="login-btn">Login</button>
-              <!-- <a href="user-forgot-password.php">forgot Passsword</a> -->
               <p class="text">Already have an account? <a href="user-login.php">Login</a></p>
 			  <a href="index.php">library_management</a>
             </form>

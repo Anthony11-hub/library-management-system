@@ -4,27 +4,24 @@ error_reporting(0);
 include('includes/config.php');
 if(isset($_POST['change']))
 {
-$email=$_POST['email'];
-$mobile=$_POST['mobile'];
+$forgotPin=$_POST['forgotPin'];
 $newpassword=md5($_POST['newpassword']);
-  $sql ="SELECT EmailId FROM tblstudents WHERE EmailId=:email and MobileNumber=:mobile";
+  $sql ="SELECT forgotPin FROM tblstudents WHERE forgotPin=:forgotPin";
 $query= $dbh -> prepare($sql);
-$query-> bindParam(':email', $email, PDO::PARAM_STR);
-$query-> bindParam(':mobile', $mobile, PDO::PARAM_STR);
+$query-> bindParam(':forgotPin', $forgotPin, PDO::PARAM_STR);
 $query-> execute();
 $results = $query -> fetchAll(PDO::FETCH_OBJ);
 if($query -> rowCount() > 0)
 {
-$con="update tblstudents set Password=:newpassword where EmailId=:email and MobileNumber=:mobile";
+$con="update tblstudents set Password=:newpassword where forgotPin=:forgotPin";
 $chngpwd1 = $dbh->prepare($con);
-$chngpwd1-> bindParam(':email', $email, PDO::PARAM_STR);
-$chngpwd1-> bindParam(':mobile', $mobile, PDO::PARAM_STR);
+$chngpwd1-> bindParam(':forgotPin', $forgotPin, PDO::PARAM_STR);
 $chngpwd1-> bindParam(':newpassword', $newpassword, PDO::PARAM_STR);
 $chngpwd1->execute();
 echo "<script>alert('Your Password succesfully changed');</script>";
 }
 else {
-echo "<script>alert('Email id or Mobile no is invalid');</script>"; 
+echo "<script>alert('The personal Access Pin is invalid');</script>"; 
 }
 }
 ?>
@@ -37,13 +34,15 @@ echo "<script>alert('Email id or Mobile no is invalid');</script>";
     <meta name="author" content="" />
     <title>Online Library Management System | Password Recovery </title>
     <!-- BOOTSTRAP CORE STYLE  -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- <link href="assets/css/bootstrap.css" rel="stylesheet" /> -->
     <!-- FONT AWESOME STYLE  -->
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <!-- CUSTOM STYLE  -->
-    <link href="assets/css/style.css" rel="stylesheet" />
+    <!-- <link href="assets/css/style.css" rel="stylesheet" /> -->
     <!-- GOOGLE FONT -->
+    <link rel="stylesheet" href="assets/css/registration.css">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    
      <script type="text/javascript">
 function valid()
 {
@@ -60,18 +59,37 @@ return true;
 </head>
 <body>
     <!------MENU SECTION START-->
-<?php include('includes/header.php');?>
 <!-- MENU SECTION END-->
-<div class="content-wrapper">
-<div class="container">
-<div class="row pad-botm">
-<div class="col-md-12">
-<h4 class="header-line">User Password Recovery</h4>
-</div>
-</div>
              
-<!--LOGIN PANEL START-->           
-<div class="row">
+<!--LOGIN PANEL START-->        
+<div class="login-form-bd">
+        <div class="form-wrapper">
+          <div class="form-container">
+            <h1>Forgot Password</h1>
+            <form role="form" name="chngpwd" method="post" onSubmit="return valid();">
+              <div class="form-control">
+                <input type="text" name="forgotPin" autocomplete="off" required >
+                <label> Personal Access Pin</label>
+              </div>
+      
+              <div class="form-control">
+                <input  type="password" name="newpassword" autocomplete="off" required  >
+                <label> Password</label>
+              </div>
+
+              <div class="form-control">
+                <input type="password" name="confirmpassword" autocomplete="off" required  >
+                <label>Confirm Password</label>
+              </div>
+
+              <button type="submit" name="change" id="submit" class="login-btn" style="background-color:#007bff;">Change Password</button>
+              <p class="text">Already have an account? <a href="user-login.php">Login</a></p>
+			  <a href="index.php">library_management</a>
+            </form>
+          </div>
+        </div>
+      </div>   
+<!-- <div class="row">
 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3" >
 <div class="panel panel-info">
 <div class="panel-heading">
@@ -106,14 +124,12 @@ return true;
  </div>
 </div>
 </div>
-</div>  
+</div>   -->
 <!---LOGIN PABNEL END-->            
              
  
-    </div>
-    </div>
      <!-- CONTENT-WRAPPER SECTION END-->
- <?php include('includes/footer.php');?>
+     <script src="assets/js/login.js"></script>
       <!-- FOOTER SECTION END-->
     <script src="assets/js/jquery-1.10.2.js"></script>
     <!-- BOOTSTRAP SCRIPTS  -->

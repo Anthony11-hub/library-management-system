@@ -20,8 +20,8 @@ else{
     <meta name="author" content="" />
     <title>Online Library Management System |  Issued Books</title>
     <!-- BOOTSTRAP CORE STYLE  -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+    <!-- <link href="assets/css/bootstrap.css" rel="stylesheet" /> -->
     <!-- FONT AWESOME STYLE  -->
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
     <!-- DATATABLE STYLE  -->
@@ -30,7 +30,8 @@ else{
     <!-- <link href="assets/css/style.css" rel="stylesheet" /> -->
     <!-- GOOGLE FONT -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-    <link rel="stylesheet" href="assets/css/select.css">
+    <!-- <link rel="stylesheet" href="assets/css/select.css"> -->
+    <link rel="stylesheet" href="assets/css/issued.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
@@ -59,70 +60,95 @@ else{
 
 <!-- MENU SECTION END-->
 
-                                  <?php 
-                                      $sid = $_SESSION['stdid'];
-                                      $sql = "SELECT 
-                                                tblbooks.BookName,
-                                                tblbooks.ISBNNumber,
-                                                tblissuedbookdetails.IssuesDate,
-                                                tblissuedbookdetails.ReturnDate,
-                                                tblissuedbookdetails.id as rid,
-                                                tblissuedbookdetails.fine
-                                              FROM 
-                                                tblissuedbookdetails 
-                                                JOIN 
-                                                  tblstudents ON tblstudents.StudentId = tblissuedbookdetails.StudentId 
-                                                JOIN 
-                                                  tblbooks ON tblbooks.id = tblissuedbookdetails.BookId 
-                                              WHERE 
-                                                tblstudents.StudentId = :sid 
-                                              ORDER BY 
-                                                tblissuedbookdetails.id DESC";
+<?php 
+    $sid = $_SESSION['stdid'];
+    $sql = "SELECT 
+                tblbooks.BookName,
+                tblbooks.bookImage,
+                tblbooks.ISBNNumber,
+                tblbooks.BookDescription,
+                tblissuedbookdetails.IssuesDate,
+                tblissuedbookdetails.ReturnDate,
+                tblissuedbookdetails.id as rid,
+                tblissuedbookdetails.fine
+            FROM 
+                tblissuedbookdetails 
+                JOIN 
+                tblstudents ON tblstudents.StudentId = tblissuedbookdetails.StudentId 
+                JOIN 
+                tblbooks ON tblbooks.id = tblissuedbookdetails.BookId 
+            WHERE 
+                tblstudents.StudentId = :sid 
+            ORDER BY 
+                tblissuedbookdetails.id DESC";
                                       
-                                      $query = $dbh->prepare($sql);
-                                      $query->bindParam(':sid', $sid, PDO::PARAM_STR);
-                                      $query->execute();
-                                      $results = $query->fetchAll(PDO::FETCH_OBJ);
-                                      $cnt = 1;
-                                    //   BookName, ISDNNumber, IssuesDate
-                                      if ($query->rowCount() > 0) {
-                                          foreach ($results as $result) {
-                                  ?>   
-                                    <div class="container-fluid py-5" id="about">
-                                        <div class="container">
-                                            <div class="row align-items-center">
-                                                <div class="col-lg-7">
-                                                    <h3 class="mb-4"><?php echo htmlentities($result->BookName);?></h3>
-                                                    <div class="row mb-3">
-                                                
-                                                        <div class="col-sm-6 py-2"><h6>ISBN: <span ><?php echo htmlentities($result->ISBNNumber);?></span></h6></div>
-                                                        <div class="col-sm-6 py-2"><h6>Issue Date: <span ><?php echo htmlentities($result->IssuesDate);?></span></h6></div>
-                                                        <div class="col-sm-6 py-2"><h6>Return Date: <?php
-                                                                                                if ($result->ReturnDate == "") {
-                                                                                                ?>
-                                                                                                            <span style="color:red">
-                                                                                                                <?php echo htmlentities("Not Return Yet"); ?>
-                                                                                                            </span>
-                                                                                                <?php
-                                                                                                        } else {
-                                                                                                            echo htmlentities($result->ReturnDate);
-                                                                                                        }
-                                                                                                ?></h6></div>
-                                                        <div class="col-sm-6 py-2"><h6>Fine: <span ><?php echo htmlentities($result->fine);?></span></h6></div>
+    $query = $dbh->prepare($sql);
+    $query->bindParam(':sid', $sid, PDO::PARAM_STR);
+    $query->execute();
+    $results = $query->fetchAll(PDO::FETCH_OBJ);
+    $cnt = 1;
+    //   BookName, ISDNNumber, IssuesDate
+    if ($query->rowCount() > 0) {
+        foreach ($results as $result) {
+?>   
 
-                                                        <?php if($result->isIssued=='1'): ?>
-                                                        <div class="col-sm-6 py-2" style="color:red;"><h6>Availability: <span class="text-secondary">Book Issued</span></h6></div>
-                                                        <?php endif;?>
-                                                    </div>
-                                                    <?php }} ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>                                   
+    <div class="card">
+        <div class="additional">
+            <div class="user-card">
+            <img src="admin/bookimg/<?php echo htmlentities($result->bookImage);?>" alt=""width="149" height="270">
+            </div>
+            <div class="more-info">
+            <h1>Book Details</h1>
+            <div class="coords">
+                <span>ISBN: <span ><?php echo htmlentities($result->ISBNNumber);?></span>
+            </div>
+            <div class="coords">
+                <span>Issue Date: <?php echo htmlentities($result->IssuesDate);?></span>
+            </div>
+            <div class="coords">
+                <span>Return Date: <?php
+                                    if ($result->ReturnDate == "") {
+                                    ?>
+                                                <span style="color:red">
+                                                    <?php echo htmlentities("Not Return Yet"); ?>
+                                                </span>
+                                    <?php
+                                            } else {
+                                                echo htmlentities($result->ReturnDate);
+                                            }
+                                    ?>
+                </span>
+            </div>
+            <div class="coords">
+                <span>Fine: <?php echo htmlentities($result->fine);?></span>
+            </div>
+            <!-- <div class="stats">
+                <div>
+                <div class="title">Category</div>
+                <i class="fa fa-trophy"></i>
+                <div class="value">Self Improvement</div>
+                </div>
+                <div>
+                <div class="title">Author</div>
+                <i class="fa fa-group"></i>
+                <div class="value"></div>
+                </div>
+            </div> -->
+            </div>
+        </div>
+        <div class="general">
+
+            <h1><?php echo htmlentities($result->BookName);?></h1>
+            <p><?php echo htmlentities($result->BookDescription);?></p>
+        </div>
+        </div>
+
+        <?php }} ?>
+
+                                
                                          
 
      <!-- CONTENT-WRAPPER SECTION END-->
-  <?php include('includes/footer.php');?>
       <!-- FOOTER SECTION END-->
     <!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
     <!-- CORE JQUERY  -->
