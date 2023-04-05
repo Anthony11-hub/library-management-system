@@ -82,7 +82,7 @@ return true;
                 <label>Confirm Password</label>
               </div>
 
-              <button type="submit" name="change" id="submit" class="login-btn">Change Password</button>
+              <button type="submit" name="change" id="submit" class="login-btn" style="background-color:#007bff;">Change Password</button>
               <p class="text">Already have an account? <a href="user-login.php">Login</a></p>
 			  <a href="index.php">library_management</a>
             </form>

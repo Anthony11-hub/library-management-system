@@ -66,7 +66,7 @@ else{
                 tblbooks.BookName,
                 tblbooks.bookImage,
                 tblbooks.ISBNNumber,
-                tblbooks.BookPrice,
+                tblbooks.BookDescription,
                 tblissuedbookdetails.IssuesDate,
                 tblissuedbookdetails.ReturnDate,
                 tblissuedbookdetails.id as rid,
@@ -122,7 +122,7 @@ else{
             <div class="coords">
                 <span>Fine: <?php echo htmlentities($result->fine);?></span>
             </div>
-            <div class="stats">
+            <!-- <div class="stats">
                 <div>
                 <div class="title">Category</div>
                 <i class="fa fa-trophy"></i>
@@ -133,13 +133,13 @@ else{
                 <i class="fa fa-group"></i>
                 <div class="value"></div>
                 </div>
-            </div>
+            </div> -->
             </div>
         </div>
         <div class="general">
 
             <h1><?php echo htmlentities($result->BookName);?></h1>
-            <p><?php echo htmlentities($result->BookPrice);?></p>
+            <p><?php echo htmlentities($result->BookDescription);?></p>
         </div>
         </div>
 
@@ -149,7 +149,6 @@ else{
                                          
 
      <!-- CONTENT-WRAPPER SECTION END-->
-  <?php include('includes/footer.php');?>
       <!-- FOOTER SECTION END-->
     <!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
     <!-- CORE JQUERY  -->

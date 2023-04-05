@@ -94,7 +94,10 @@ echo '<script>alert("Your profile has been updated")</script>';
                               <p>Student ID: <?php echo htmlentities($result->StudentId);?></p>
                             </div> 
                             <div class="description-profile">Reg Date : <?php echo htmlentities($result->RegDate);?></div>
-                            <div class="description-profile">Last Updation Date : 2023-04-02 17:31:20</div>
+                            <div class="description-profile"><?php if($result->UpdationDate!=""){?>
+                                    Last Updation Date :<?php echo htmlentities($result->UpdationDate);?>
+                                  <?php } ?>
+                            </div>
                             <div id="container" align="center">
                               <form name="signup" method="post">
                                 <input class="profile-input" type="text" type="text" name="fullanme" value="<?php echo htmlentities($result->FullName);?>" autocomplete="off" required>
@@ -109,9 +112,7 @@ echo '<script>alert("Your profile has been updated")</script>';
                       </div>
                       <?php }
               } ?>
-              <footer>
-    <p class="heading-primary--sub" style="margin-top:200px;">library Management System</p>
-</footer>
+
 
      <!-- CONTENT-WRAPPER SECTION END-->
     <script src="assets/js/jquery-1.10.2.js"></script>

@@ -66,27 +66,27 @@ echo "<script>alert('Something went wrong. Please try again');</script>";
     <!-- <link href="assets/css/style.css" rel="stylesheet" /> -->
     <!-- GOOGLE FONT -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-    <script type="text/javascript">
+<script type="text/javascript">
 function valid() {
-  if (document.signup.password.value != document.signup.confirmpassword.value) {
-    alert("Password and Confirm Password Field do not match  !!");
-    document.signup.confirmpassword.focus();
+  const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirmpassword").value;
+
+  if (password !== confirmPassword) {
+    alert("Password and Confirm Password Field do not match!!");
+    document.getElementById("confirmpassword").focus();
     return false;
   }
-  
-  // Password validation
-  var password = document.signup.password.value;
-  var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-  if (!passwordRegex.test(password)) {
-    alert("Password should contain at least 8 characters, including 1 lowercase letter, 1 uppercase letter, and 1 number.");
-    document.signup.password.focus();
+
+  const passwordStrength = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/;
+  if (!passwordStrength.test(password)) {
+    alert("Password must contain at least 8 characters including at least one uppercase letter, one lowercase letter, one number, and one special character (!@#$%^&*)");
+    document.getElementById("password").focus();
     return false;
   }
-  
+
   return true;
 }
 </script>
-
 <script>
 function checkAvailability() {
 $("#loaderIcon").show();
@@ -105,64 +105,6 @@ error:function (){}
 
 </head>
 <body>
-    <!------MENU SECTION START-->
-<!-- MENU SECTION END-->
-    <!-- <div class="content-wrapper">
-         <div class="container">
-        <div class="row pad-botm">
-            <div class="col-md-12">
-                <h4 class="header-line">User Signup</h4>
-                
-                            </div>
-
-        </div>
-             <div class="row">
-           
-<div class="col-md-9 col-md-offset-1">
-               <div class="panel panel-danger">
-                        <div class="panel-heading">
-                           SINGUP FORM
-                        </div>
-                        <div class="panel-body">
-                            <form name="signup" method="post" onSubmit="return valid();">
-<div class="form-group">
-<label>Enter Full Name</label>
-<input class="form-control" type="text" name="fullname" autocomplete="off" required />
-</div>
-
-
-<div class="form-group">
-<label>Mobile Number :</label>
-<input class="form-control" type="text" name="mobileno" maxlength="10" autocomplete="off" required />
-</div>
-                                        
-<div class="form-group">
-<label>Enter Email</label>
-<input class="form-control" type="email" name="email" id="emailid" onBlur="checkAvailability()"  autocomplete="off" required  />
-   <span id="user-availability-status" style="font-size:12px;"></span> 
-</div>
-
-<div class="form-group">
-<label>Enter Password</label>
-<input class="form-control" type="password" name="password" autocomplete="off" required  />
-</div>
-
-<div class="form-group">
-<label>Confirm Password </label>
-<input class="form-control"  type="password" name="confirmpassword" autocomplete="off" required  />
-</div>
-                             
-<button type="submit" name="signup" class="btn btn-danger" id="submit">Register Now </button>
-
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div> -->
-
-
     <div class="login-form-bd">
         <div class="form-wrapper">
           <div class="form-container">
@@ -189,12 +131,12 @@ error:function (){}
               </div>
       
               <div class="form-control">
-                <input  type="password" name="password" autocomplete="off" required  >
+                <input  type="password" name="password" autocomplete="off" id="password" required  >
                 <label> Password</label>
               </div>
 
               <div class="form-control">
-                <input type="password" name="confirmpassword" autocomplete="off" required  >
+                <input type="password" name="confirmpassword" autocomplete="off" id="confirmpassword" required  >
                 <label>Confirm Password</label>
               </div>
 

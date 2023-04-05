@@ -15,7 +15,7 @@ else
         $category=$_POST['category'];
         $author=$_POST['author'];
         $isbn=$_POST['isbn'];
-        $price=$_POST['price'];
+        $BookDescription=$_POST['BookDescription'];
         $bookid=intval($_GET['bookid']);
         $keywords=$_POST['keywords'];
         $studentid=intval($_GET['studentid']);
@@ -58,7 +58,7 @@ else
 
 <?php 
     $bookid=intval($_GET['bookid']);
-    $sql = "SELECT tblbooks.BookName,tblcategory.CategoryName,tblcategory.id as cid,tblauthors.AuthorName,tblauthors.id as athrid,tblbooks.ISBNNumber,tblbooks.BookPrice,tblbooks.id as bookid,tblbooks.bookImage,tblbooks.isIssued, tblbooks.Status, tblbooks.Link from  tblbooks join tblcategory on tblcategory.id=tblbooks.CatId join tblauthors on tblauthors.id=tblbooks.AuthorId where tblbooks.id=:bookid";
+    $sql = "SELECT tblbooks.BookName,tblcategory.CategoryName,tblcategory.id as cid,tblauthors.AuthorName,tblauthors.id as athrid,tblbooks.ISBNNumber,tblbooks.BookDescription,tblbooks.id as bookid,tblbooks.bookImage,tblbooks.isIssued, tblbooks.Status, tblbooks.Link from  tblbooks join tblcategory on tblcategory.id=tblbooks.CatId join tblauthors on tblauthors.id=tblbooks.AuthorId where tblbooks.id=:bookid";
     $query = $dbh -> prepare($sql);
     $query->bindParam(':bookid',$bookid,PDO::PARAM_STR);
     $query->execute();
@@ -80,7 +80,7 @@ else
             </div>
             <div class="col-lg-7">
                 <h3 class="mb-4">Book Decription</h3>
-                <p><?php echo htmlentities($result->BookPrice);?>.</p>
+                <p><?php echo htmlentities($result->BookDescription);?>.</p>
                 <div class="row mb-3">
                     <div class="col-sm-6 py-2"><h6>Book Name: <span ><?php echo htmlentities($result->BookName);?></span></h6></div>
                     <div class="col-sm-6 py-2"><h6>Author: <span ><?php echo htmlentities($athrname=$result->AuthorName);?></span></h6></div>

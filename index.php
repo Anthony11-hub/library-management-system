@@ -22,6 +22,29 @@ include('includes/config.php');
     <link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet"> 
     <script src="script.js" defer></script>
 </head>
+<script>
+    function searchBooks() {
+    // Get the search query from the input field
+    var searchQuery = document.getElementById("search-input").value.toLowerCase();
+
+    // Get all the book cards
+    var bookCards = document.getElementsByClassName("col-1-of-4");
+
+    // Loop through all the book cards and hide/show them based on the search query
+    for (var i = 0; i < bookCards.length; i++) {
+        var bookName = bookCards[i].querySelector(".card-title").innerText.toLowerCase();
+        var authorName = bookCards[i].querySelector(".card-text:first-of-type").innerText.toLowerCase();
+        var category = bookCards[i].querySelector(".card-text:last-of-type").innerText.toLowerCase();
+
+        if (bookName.indexOf(searchQuery) > -1 || authorName.indexOf(searchQuery) > -1 || category.indexOf(searchQuery) > -1) {
+            bookCards[i].style.display = "block";
+        } else {
+            bookCards[i].style.display = "none";
+        }
+    }
+}
+
+</script>
 <body>
     <header id="" class="header">
         <div class="header__img"></div>
@@ -39,8 +62,8 @@ include('includes/config.php');
     <section class="books-section">
         <div class="wrap">
             <div class="search">
-                <input type="text" class="search__term" placeholder="what are you looking for?">
-                <button type="submit" class="search__button">
+                <input type="text" id="search-input" class="search__term" placeholder="what are you looking for?" onkeyup="if (event.keyCode === 13) { searchBooks(); }">
+                <button type="submit" class="search__button" onclick="searchBooks()">
                     <i class="fa fa-search"></i>
                 </button>
             </div>

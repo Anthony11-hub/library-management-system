@@ -60,7 +60,7 @@ echo "<script>alert('Invalid Details');</script>";
                 <label> Password</label>
               </div>
 			  <!-- <input type="submit" name="login_button" class="login-btn" value="Login" /> -->
-              <button class="login-btn" type="submit" name="login" >Login</button>
+              <button class="login-btn" type="submit" name="login" style="background-color:#007bff;">Login</button>
               <!-- <a href="user-forgot-password.php">forgot Passsword</a> -->
               <!-- <p class="text">Don't have an account? <a href="signup.php"> Register</a></p>
 			  <a href="index.php">library_management</a> -->

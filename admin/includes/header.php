@@ -62,7 +62,16 @@
           </ul>
         </li>
 
-        <li><a href="reg-students.php" style="color: #fff;">Reg Students</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: #fff;">
+            Students <span class="caret"></span>
+          </a>
+
+          <ul class="dropdown-menu">
+            <li><a href="reg-students.php">Registered Students</a></li>
+            <li><a href="sign-up-student.php">Signup student</a></li>
+          </ul>
+        </li>
         <li><a href="change-password.php" style="color: #fff;">Change Password</a></li>
 
         <li><a href="logout.php" class="btn btn-danger" style="color: #fff;">LOG ME OUT</a></li>
